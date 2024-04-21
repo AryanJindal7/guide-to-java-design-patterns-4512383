@@ -4,9 +4,9 @@ public class App {
 
 
     public static void main(String[] args) {
-        UserInterface roadUserInterface = createUserInterface("RED");
-        UserInterface mountainUserInterface = createUserInterface("BLUE");
-
+        UserInterface roadUserInterface = createUserInterface("Red");
+        UserInterface mountainUserInterface = createUserInterface("Blue");
+//        UserInterfaceFactory userInterface=UserFactory.getInterface("Red");
         System.out.println(roadUserInterface);
         System.out.println(mountainUserInterface);
 
@@ -14,14 +14,11 @@ public class App {
 
 
     private static UserInterface createUserInterface(String color) {
-        if (color.equalsIgnoreCase("RED")) {
-            return new UserInterface(new RedButton(), new RedScrollBar());
-        } else if (color.equalsIgnoreCase("BLUE")) {
-            return new UserInterface(new BlueButton(), new BlueScrollBar());
-        } else {
-            throw new IllegalArgumentException("Color not supported");
-        }
+        var userInterfaceFactory=UserFactory.getInterface(color);
+        var button=userInterfaceFactory.createButton();
+        var scrollBar=userInterfaceFactory.createScrollBar();
 
+    return new UserInterface(button,scrollBar);
     }
 
 }
